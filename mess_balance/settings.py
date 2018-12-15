@@ -180,3 +180,5 @@ DATE_FORMAT = '%d %b, %Y'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = '/'
+
+AUTH_USER_MODEL = 'accounts.User'
