@@ -25,6 +25,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('meals/', include('meals.urls')),
     path('bazaar/', include('bazaar.urls')),
+    path('extra_cost/', include('extra_cost.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
 ]
 
