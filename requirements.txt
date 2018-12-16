@@ -1,7 +1,10 @@
+certifi==2018.11.29
 Django==2.1.4
 django-debug-helper==1.1.6
 django-debug-toolbar==1.11
 psycopg2==2.7.6.1
 psycopg2-binary==2.7.6.1
 pytz==2018.7
+sentry-sdk==0.6.2
 sqlparse==0.2.4
+urllib3==1.24.1
