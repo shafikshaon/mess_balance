@@ -46,6 +46,7 @@ THIRD_PARTY_APPS = [
 CUSTOM_APPS = [
     'accounts.apps.AccountsConfig',
     'meals.apps.MealsConfig',
+    'bazaar.apps.BazaarConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + CUSTOM_APPS

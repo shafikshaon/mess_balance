@@ -24,6 +24,7 @@ urlpatterns = [
     path('', DashboardView.as_view()),
     path('accounts/', include('accounts.urls')),
     path('meals/', include('meals.urls')),
+    path('bazaar/', include('bazaar.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
 ]
 

@@ -1,0 +1,66 @@
+{% extends 'base2.html' %}
+{% block title %} Add Meal {% endblock %}
+{% block content %}
+    <div class="container content-area">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="card-header m-b-15">
+                        <h4>Bazaar Entry</h4>
+                        <h5 class="text-info">It is {% now "j F Y, H:i" %}</h5>
+                    </div>
+                    <form method="post" class="form-horizontal">
+                        {% csrf_token %}
+
+                        {{ form.non_field_errors }}
+
+                        {% for hidden_field in form.hidden_fields %}
+                            {% if hidden_field.errors %}
+                                <ul>
+                                    {% for error in hidden_field.errors %}
+                                        <li>(Hidden field {{ hidden_field.name }}) {{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                            {{ hidden_field }}
+                        {% endfor %}
+
+                        {% for field in form.visible_fields %}
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label font-weight-bold"
+                                       for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                                <div class="col-sm-10">
+                                    {% if field.field.widget.input_type == 'select' or field.field.widget.input_type == 'text' or field.field.widget.input_type == 'number' %}
+                                        {{ field }}
+                                    {% endif %}
+
+                                    {% if field.errors %}
+                                        <ul>
+                                            {% for error in field.errors %}
+                                                <li><span class="text-danger m-b-none">{{ error }}</span></li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+
+                                    {% if field.help_text %}
+                                        <span class="help-block m-b-none">{{ field.help_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-plus-circle"
+                                                                                 aria-hidden="true"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
