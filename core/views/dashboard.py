@@ -16,7 +16,7 @@ class DashboardView(LoginRequiredMixin, View):
         today = datetime.datetime.now().day
         today_meals_count = Meal.objects \
             .filter(meal_date__day=today) \
-            .aggregate(today_breakfast_count=Sum('breakfast'), today_lunch_count=Sum('lunch'),
+            .aggregate(today_breakfast_count=Sum('breakfast')*2, today_lunch_count=Sum('lunch'),
                        today_dinner_count=Sum('dinner'))
         # today_meals = Meal.objects.filter(meal_date__day=today).values('user_id', 'breakfast', 'lunch', 'dinner')
         today_meals = Meal.objects.select_related('user').filter(meal_date__day=today)

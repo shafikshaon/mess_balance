@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="panel">
                     <div class="card-header m-b-15">
-                        <h4><i class="ti-bag m-r-10"></i> Bazaar Entry</h4>
+                        <h4><i class="ti-user m-r-10"></i> Add Member</h4>
                         <h5 class="text-info">It is {% now "j F Y, H:i" %}</h5>
                     </div>
                     <form method="post" class="form-horizontal">
@@ -30,7 +30,7 @@
                                 <label class="col-sm-2 control-label font-weight-bold"
                                        for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
                                 <div class="col-sm-10">
-                                    {% if field.field.widget.input_type == 'select' or field.field.widget.input_type == 'text' or field.field.widget.input_type == 'number' %}
+                                    {% if field.field.widget.input_type == 'password' or field.field.widget.input_type == 'checkbox' or field.field.widget.input_type == 'select' or field.field.widget.input_type == 'text' or field.field.widget.input_type == 'number' %}
                                         {{ field }}
                                     {% endif %}
 

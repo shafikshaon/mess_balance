@@ -20,6 +20,7 @@ class CustomUserManager(UserManager):
 
 
 class User(AbstractUser, TimeLog):
+    user = models.ForeignKey('self', on_delete=models.CASCADE, related_name='accounts_user')
     email = models.EmailField(blank=False, null=False)
     is_user = models.BooleanField(default=False, null=False, blank=False)
     is_admin = models.BooleanField(default=False, null=False, blank=False)

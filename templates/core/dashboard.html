@@ -11,10 +11,11 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ today_meals_count.today_breakfast_count }}</h5>
                         <p class="card-text">
-                            {% for breakfast in today_meals %}
-                                <li>{{ breakfast.user.get_full_name }} <strong>({{ breakfast.breakfast }})</strong></li>
+                            {% for meal in today_meals %}
+                                {% if meal.breakfast != 0 %}
+                                    <li>{{ meal.user.get_full_name }} <strong>({{ meal.breakfast }})</strong></li>
+                                {% endif %}
                             {% endfor %}
-                        </p>
                     </div>
                 </div>
             </div>
@@ -25,10 +26,11 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ today_meals_count.today_lunch_count }}</h5>
                         <p class="card-text">
-                            {% for breakfast in today_meals %}
-                                <li>{{ breakfast.user.get_full_name }} <strong>({{ breakfast.lunch }})</strong></li>
+                            {% for meal in today_meals %}
+                                {% if meal.lunch != 0 %}
+                                    <li>{{ meal.user.get_full_name }} <strong>({{ meal.lunch }})</strong></li>
+                                {% endif %}
                             {% endfor %}
-                        </p>
                     </div>
                 </div>
             </div>
@@ -39,10 +41,11 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ today_meals_count.today_dinner_count }}</h5>
                         <p class="card-text">
-                            {% for breakfast in today_meals %}
-                                <li>{{ breakfast.user.get_full_name }} <strong>({{ breakfast.dinner }})</strong></li>
+                            {% for meal in today_meals %}
+                                {% if meal.dinner != 0 %}
+                                    <li>{{ meal.user.get_full_name }} <strong>({{ meal.dinner }})</strong></li>
+                                {% endif %}
                             {% endfor %}
-                        </p>
                     </div>
                 </div>
             </div>

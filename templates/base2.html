@@ -28,7 +28,7 @@
                 <span class="ti-menu"></span>
             </a>
         </div>
-        <a class="navbar-brand" href="/">Fixed navbar</a>
+        <a class="navbar-brand" href="/">Home</a>
 
         <ul class="navbar-nav ml-auto navbar-top-links">
             <li class="dropdown">
@@ -82,20 +82,19 @@
             </div>
 
             <li>
-                <a href="#homeSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
+                <a href="#userSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
                    aria-expanded="false">
-                    <i class="ti-home m-r-10"></i> Home
+                    <i class="ti-user m-r-10"></i> Members
                 </a>
-                <ul class="collapse list-unstyled" id="homeSubmenu" data-parent="#accordion">
-                    <li><a href="#">Home 1</a></li>
-                    <li><a href="#">Home 2</a></li>
-                    <li><a href="#">Home 3</a></li>
+                <ul class="collapse list-unstyled" id="userSubmenu" data-parent="#accordion">
+                    <li><a href="{% url 'user-add' %}">Add Member</a></li>
+                    <li><a href="{% url 'user-list' %}">Member List</a></li>
                 </ul>
             </li>
             <li>
                 <a href="#mealSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
                    aria-expanded="false">
-                    <i class="ti-home m-r-10"></i> Meals
+                    <i class="ti-time m-r-10"></i> Meals
                 </a>
                 <ul class="collapse list-unstyled" id="mealSubmenu" data-parent="#accordion">
                     <li><a href="{% url 'meal-add' %}">Add Meal</a></li>
@@ -105,7 +104,7 @@
             <li>
                 <a href="#bazaarSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
                    aria-expanded="false">
-                    <i class="ti-home m-r-10"></i> Bazaar
+                    <i class="ti-shopping-cart m-r-10"></i> Bazaar
                 </a>
                 <ul class="collapse list-unstyled" id="bazaarSubmenu" data-parent="#accordion">
                     <li><a href="{% url 'bazaar-add' %}">Bazaar Entry</a></li>
