@@ -32,23 +32,21 @@
 
         <ul class="navbar-nav ml-auto navbar-top-links">
             <li class="dropdown">
-                <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img
-                        src="https://placehold.it/200x200" alt="user-img" width="36" class="img-circle">
-                    <b class="d-none d-sm-inline-block">First name</b></a>
+                <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
+                   aria-expanded="false">{{ request.user.get_full_name }}</a>
                 <ul class="dropdown-menu dropdown-user">
                     <li>
                         <div class="dw-user-box">
-                            <div class="u-img"><img src="https://placehold.it/200x200" alt="user"></div>
                             <div class="u-text">
                                 <h4>{{ request.user.get_full_name }}</h4>
                                 <p class="text-muted">{{ request.user.email }}</p>
+                                <p class="text-info">{{ request.user.member_from }}</p>
                             </div>
                         </div>
                     </li>
                     <div class="dropdown-divider"></div>
                     <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
                     <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                    <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
                     <div class="dropdown-divider"></div>
                     <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
                     <div class="dropdown-divider"></div>
@@ -63,51 +61,50 @@
 <div class="wrapper">
     <!-- Sidebar Holder -->
     <nav id="sidebar" class="nav-sidebar">
-        <ul class="list-unstyled components slimescroll-id" id="accordion"></ul>
-
-        <li>
-            <a href="#userSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
-               aria-expanded="false">
-                <i class="ti-user m-r-10"></i> Members
-            </a>
-            <ul class="collapse list-unstyled" id="userSubmenu" data-parent="#accordion">
-                <li><a href="{% url 'user-add' %}">Add Member</a></li>
-                <li><a href="{% url 'user-list' %}">Member List</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#mealSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
-               aria-expanded="false">
-                <i class="ti-time m-r-10"></i> Meals
-            </a>
-            <ul class="collapse list-unstyled" id="mealSubmenu" data-parent="#accordion">
-                <li><a href="{% url 'meal-add' %}">Add Meal</a></li>
-                <li><a href="{% url 'meal-list' %}">Meal List</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#bazaarSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
-               aria-expanded="false">
-                <i class="ti-shopping-cart m-r-10"></i> Bazaar
-            </a>
-            <ul class="collapse list-unstyled" id="bazaarSubmenu" data-parent="#accordion">
-                <li><a href="{% url 'bazaar-add' %}">Bazaar Entry</a></li>
-                <li><a href="{% url 'bazaar-list' %}">Bazaar List</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#extra_costSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
-               aria-expanded="false">
-                <i class="ti-shopping-cart m-r-10"></i> Extra Cost
-            </a>
-            <ul class="collapse list-unstyled" id="extra_costSubmenu" data-parent="#accordion">
-                <li><a href="{% url 'extra_cost-add' %}">Extra Cost Entry</a></li>
-                <li><a href="{% url 'extra_cost-list' %}">Extra Cost List</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#" class=" wave-effect">Contact</a>
-        </li>
+        <ul class="list-unstyled components slimescroll-id" id="accordion">
+            <li>
+                <a href="#userSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
+                   aria-expanded="false">
+                    <i class="ti-user m-r-10"></i> Members
+                </a>
+                <ul class="collapse list-unstyled" id="userSubmenu" data-parent="#accordion">
+                    <li><a href="{% url 'user-add' %}">Add Member</a></li>
+                    <li><a href="{% url 'user-list' %}">Member List</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#mealSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
+                   aria-expanded="false">
+                    <i class="ti-time m-r-10"></i> Meals
+                </a>
+                <ul class="collapse list-unstyled" id="mealSubmenu" data-parent="#accordion">
+                    <li><a href="{% url 'meal-add' %}">Add Meal</a></li>
+                    <li><a href="{% url 'meal-list' %}">Meal List</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#bazaarSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
+                   aria-expanded="false">
+                    <i class="ti-shopping-cart m-r-10"></i> Bazaar
+                </a>
+                <ul class="collapse list-unstyled" id="bazaarSubmenu" data-parent="#accordion">
+                    <li><a href="{% url 'bazaar-add' %}">Bazaar Entry</a></li>
+                    <li><a href="{% url 'bazaar-list' %}">Bazaar List</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#extra_costSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
+                   aria-expanded="false">
+                    <i class="ti-shopping-cart m-r-10"></i> Extra Cost
+                </a>
+                <ul class="collapse list-unstyled" id="extra_costSubmenu" data-parent="#accordion">
+                    <li><a href="{% url 'extra_cost-add' %}">Extra Cost Entry</a></li>
+                    <li><a href="{% url 'extra_cost-list' %}">Extra Cost List</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class=" wave-effect">Contact</a>
+            </li>
         </ul>
     </nav>
 

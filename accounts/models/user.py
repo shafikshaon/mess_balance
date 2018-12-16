@@ -24,6 +24,7 @@ class User(AbstractUser, TimeLog):
     email = models.EmailField(blank=False, null=False)
     is_user = models.BooleanField(default=False, null=False, blank=False)
     is_admin = models.BooleanField(default=False, null=False, blank=False)
+    member_from = models.DateField(blank=False, null=False)
 
     objects = CustomUserManager()
 
