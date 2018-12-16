@@ -2,36 +2,51 @@
 {% block title %} Dashboard {% endblock %}
 {% block content %}
     <div class="container content-area">
+        <h5 class="text-info">{% now "j F Y, H:i" %}</h5>
         <div class="row">
-            <div class="col-md-12">
-                <div class="panel">
-                    <div class="card-header m-b-15">
-                        <h4>About content</h4>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <tr>
-                                <th>Sr no</th>
-                                <th>Title</th>
-                                <th>Image</th>
-                                <th>Action</th>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <a href="#" class="text-decoration-none"><i class="ti-pencil-alt"></i></a>
-                                    &nbsp;
-                                    <a href="javascript:void(0)" id="delete-id" class="text-decoration-none"><i
-                                            class="ti-trash"></i></a> &nbsp;
-                                    <a href="#" class="text-decoration-none"><i class="ti-eye"></i></a>
-                                </td>
-                            </tr>
-                        </table>
+
+            <div class="col-md-4">
+                <div class="card bg-light mb-3">
+                    <div class="card-header">Breakfast</div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ today_meals_count.today_breakfast_count }}</h5>
+                        <p class="card-text">
+                            {% for breakfast in today_meals %}
+                                <li>{{ breakfast.user.get_full_name }} <strong>({{ breakfast.breakfast }})</strong></li>
+                            {% endfor %}
+                        </p>
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-4">
+                <div class="card bg-light mb-3">
+                    <div class="card-header">Lunch</div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ today_meals_count.today_lunch_count }}</h5>
+                        <p class="card-text">
+                            {% for breakfast in today_meals %}
+                                <li>{{ breakfast.user.get_full_name }} <strong>({{ breakfast.lunch }})</strong></li>
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card bg-light mb-3">
+                    <div class="card-header">Dinner</div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ today_meals_count.today_dinner_count }}</h5>
+                        <p class="card-text">
+                            {% for breakfast in today_meals %}
+                                <li>{{ breakfast.user.get_full_name }} <strong>({{ breakfast.dinner }})</strong></li>
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 {% endblock %}

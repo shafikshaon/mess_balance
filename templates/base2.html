@@ -1,14 +1,34 @@
-{% extends 'base.html' %}
-{% block title %} Dashboard {% endblock %}
-{% block body %}
-    <header class="main-navbar-header">
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Themify icons -->
+    <link rel="stylesheet" href="{% static 'themify/themify-icons.css' %}">
+
+    <!-- Waves css -->
+    <link rel="stylesheet" href="{% static 'css/waves.css' %}">
+
+    <title>{% block title %} {% endblock %}</title>
+</head>
+
+<body>
+<header class="main-navbar-header">
         <nav class="navbar navbar-expand-md navbar-dark fixed-top theme-color">
             <div class="menu-toggle-button">
                 <a class="nav-link wave-effect" href="#" id="sidebarCollapse">
                     <span class="ti-menu"></span>
                 </a>
             </div>
-            <a class="navbar-brand" href="#">Fixed navbar</a>
+            <a class="navbar-brand" href="/">Fixed navbar</a>
 
             <ul class="navbar-nav ml-auto navbar-top-links">
                 <li class="dropdown">
@@ -61,7 +81,7 @@
                     </div>
                 </div>
 
-                <li class="active">
+                <li>
                     <a href="#homeSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
                        aria-expanded="false">
                         <i class="ti-home m-r-10"></i> Home
@@ -73,43 +93,17 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" class="wave-effect">About</a>
-                    <a href="#pageSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
-                       aria-expanded="false">Pages</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu" data-parent="#accordion" id="accordion2">
-                        <li><a href="#">Page 1</a></li>
-                        <li><a href="#">Page 2</a></li>
-                        <li><a href="#">Page 3</a></li>
-                        <li>
-                            <a href="#pageSubmenu2" class="accordion-toggle wave-effect" data-toggle="collapse"
-                               aria-expanded="false">More pages</a>
-                            <ul class="collapse list-unstyled" id="pageSubmenu2" data-parent="#accordion2">
-                                <li><a href="#">Page 4</a></li>
-                                <li><a href="#">Page 5</a></li>
-                                <li><a href="#">Page 6</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#pageSubmenu3" class="accordion-toggle wave-effect" data-toggle="collapse"
-                               aria-expanded="false">Even more</a>
-                            <ul class="collapse list-unstyled" id="pageSubmenu3" data-parent="#accordion2">
-                                <li><a href="#">Page 7</a></li>
-                                <li><a href="#">Page 8</a></li>
-                                <li><a href="#">Page 9</a></li>
-                            </ul>
-                        </li>
+                    <a href="#mealSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
+                       aria-expanded="false">
+                        <i class="ti-home m-r-10"></i> Meals
+                    </a>
+                    <ul class="collapse list-unstyled" id="mealSubmenu" data-parent="#accordion">
+                        <li><a href="{% url 'meal-add' %}">Add Meal</a></li>
+                        <li><a href="{% url 'meal-list' %}">Meal List</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#" class=" wave-effect">Portfolio</a>
-                </li>
-                <li>
                     <a href="#" class=" wave-effect">Contact</a>
-                </li>
-                <li>
-                    <a href="login.html" class=" wave-effect">
-                        <i class="ti-user m-r-10"></i>Login Page
-                    </a>
                 </li>
             </ul>
         </nav>
@@ -117,4 +111,24 @@
         {% block content %}
         {% endblock %}
     </div>
-{% endblock %}
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="{% static 'js/jquery-3.2.1-slim.js' %}"></script>
+<script src="{% static 'js/popper.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/waves.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+        Waves.init();
+        Waves.attach('.wave-effect', ['waves-button']);
+        Waves.attach('.wave-effect-float', ['waves-button', 'waves-float']);
+    });
+</script>
+</body>
+
+</html>

@@ -26,7 +26,7 @@ SECRET_KEY = 'coi2dlged9*wqel%#dc_+uf-rn#)7m1%1f#)y^y%(0&pbi#$1^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -138,7 +138,7 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.redirects.RedirectsPanel',
 ]
 
-INTERNAL_IPS = ['127.0.0.1']
+INTERNAL_IPS = ['*']
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
