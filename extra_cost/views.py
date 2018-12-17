@@ -1,5 +1,6 @@
 import datetime
 
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -18,6 +19,7 @@ class ExtraCostCreateView(LoginRequiredMixin, CreateView):
         bazaar = form.save(commit=False)
         bazaar.user_id = self.request.user.pk
         bazaar.save()
+        messages.success(self.request, 'An extra cost added successfully.')
         return HttpResponseRedirect(reverse('extra_cost-add'))
 
 
@@ -43,14 +45,10 @@ class ExtraCostUpdateView(LoginRequiredMixin, UpdateView):
     model = ExtraCost
     form_class = UpdateExtraCostForm
     login_url = 'accounts/login/'
-    success_message = 'A project updated successfully.'
 
     def form_valid(self, form):
         extra_cost = form.save(commit=False)
         extra_cost.user_id = self.request.user.pk
         extra_cost.save()
+        messages.success(self.request, 'An extra cost updated successfully.')
         return HttpResponseRedirect(reverse('extra_cost-update', kwargs={'pk': extra_cost.pk}))
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context

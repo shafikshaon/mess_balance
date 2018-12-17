@@ -45,7 +45,8 @@ class MealListView(LoginRequiredMixin, ListView):
         context['object_list'] = Meal.objects.filter(user_id=self.request.user.pk,
                                                      meal_date__month=current_month).order_by(
             'meal_date')
-        context['meal_count'] = Meal.objects.count()
+        context['meal_count'] = Meal.objects.filter(user_id=self.request.user.pk,
+                                                    meal_date__month=current_month).count()
         return context
 
 
