@@ -1,5 +1,5 @@
 {% extends 'base2.html' %}
-{% block title %} Add Meal {% endblock %}
+{% block title %} Update Meal {% endblock %}
 {% block content %}
     <div class="container content-area">
         <div class="row">
@@ -9,6 +9,18 @@
                         <h4>Update Meal</h4>
                         <h5 class="text-info">It is {% now "j F Y, H:i" %}</h5>
                     </div>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                                <div class="alert-message">
+                                    <strong>{{ message }}</strong>
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                     <form method="post" class="form-horizontal">
                         {% csrf_token %}
 
