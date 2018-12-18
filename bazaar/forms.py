@@ -3,6 +3,7 @@ import datetime
 from django import forms
 from django.utils.translation import gettext as _
 
+from accounts.models import User
 from bazaar.models import Bazaar
 
 current_year = str(datetime.date.today().year)
@@ -51,3 +52,33 @@ class UpdateBazaarForm(forms.ModelForm):
     class Meta:
         model = Bazaar
         fields = ('bazaar_date', 'item_name', 'item_weight', 'item_price')
+
+
+class BazaarSearchForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(BazaarSearchForm, self).__init__(*args, **kwargs)
+        self.fields['member'].label_from_instance = lambda obj: "%s" % obj.get_full_name()
+
+    member = forms.ModelChoiceField(
+        initial='',
+        queryset=User.objects.filter(is_active=True),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+    )
+    from_date = forms.DateField(
+        label='From date',
+        initial=datetime.date.today,
+        widget=forms.SelectDateWidget(
+            years=(current_year, next_year),
+            months=MONTHS,
+            attrs={'class': 'form-control'}))
+    to_date = forms.DateField(
+        label='To date',
+        initial=datetime.date.today,
+        widget=forms.SelectDateWidget(
+            years=(current_year, next_year),
+            months=MONTHS,
+            attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Bazaar
+        fields = ('member', 'from_date', 'to_date')

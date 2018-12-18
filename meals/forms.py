@@ -87,12 +87,14 @@ class MealSearchForm(forms.Form):
     )
     from_date = forms.DateField(
         label='From date',
+        initial=datetime.date.today,
         widget=forms.SelectDateWidget(
             years=(current_year, next_year),
             months=MONTHS,
             attrs={'class': 'form-control'}))
     to_date = forms.DateField(
-        label='From date',
+        label='To date',
+        initial=datetime.date.today,
         widget=forms.SelectDateWidget(
             years=(current_year, next_year),
             months=MONTHS,
