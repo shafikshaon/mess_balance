@@ -24,8 +24,5 @@ class DashboardView(LoginRequiredMixin, View):
         context = {
             'today_meals_count': today_meals_count,
             'today_meals': today_meals
-            # 'today_breakfast_count': today_breakfast_count,
-            # 'today_lunch_count': today_lunch_count,
-            # 'today_dinner_count': today_dinner_count
         }
         return render(request, self.template_name, context)

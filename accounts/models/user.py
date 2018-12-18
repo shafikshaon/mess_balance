@@ -16,7 +16,7 @@ class User(AbstractUser, TimeLog):
     user = models.ForeignKey('self', on_delete=models.CASCADE, related_name='accounts_user')
     email = models.EmailField(blank=False, null=False)
     is_admin = models.BooleanField(default=False, null=False, blank=False)
-    member_from = models.DateField(blank=False, null=False)
+    member_from = models.DateField(blank=True, null=True)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
 
     objects = CustomUserManager()

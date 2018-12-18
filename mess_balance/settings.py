@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'mess_balance.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mess_balance',
+        'NAME': 'mess',
         'USER': 'postgres',
         'PASSWORD': '1919',
         'HOST': 'localhost',
