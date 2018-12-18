@@ -5,8 +5,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import UpdateView, ListView, CreateView
+from django.views.generic.edit import FormMixin
 
-from extra_cost.forms import UpdateExtraCostForm, AddExtraCostForm
+from extra_cost.forms import UpdateExtraCostForm, AddExtraCostForm, ExtraCostSearchForm
 from extra_cost.models import ExtraCost
 
 
@@ -23,11 +24,11 @@ class ExtraCostCreateView(LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(reverse('extra_cost-add'))
 
 
-class ExtraCostListView(LoginRequiredMixin, ListView):
+class ExtraCostListView(LoginRequiredMixin, FormMixin, ListView):
     template_name = 'extra_cost/list.html'
     login_url = 'accounts/login/'
-
     model = ExtraCost
+    form_class = ExtraCostSearchForm
 
     # paginate_by = 1  # if pagination is desired
 
@@ -52,3 +53,26 @@ class ExtraCostUpdateView(LoginRequiredMixin, UpdateView):
         extra_cost.save()
         messages.success(self.request, 'An extra cost updated successfully.')
         return HttpResponseRedirect(reverse('extra_cost-update', kwargs={'pk': extra_cost.pk}))
+
+
+class ExtraCostSearchView(LoginRequiredMixin, FormMixin, ListView):
+    template_name = 'meals/list.html'
+    login_url = '/accounts/login/'
+    model = ExtraCost
+    form_class = ExtraCostSearchForm
+
+    def get_queryset(self):
+        from_date_day = int(self.request.GET.get('from_date_day'))
+        from_date_month = int(self.request.GET.get('from_date_month'))
+        from_date_year = int(self.request.GET.get('from_date_year'))
+        to_date_day = int(self.request.GET.get('to_date_day'))
+        to_date_month = int(self.request.GET.get('to_date_month'))
+        to_date_year = int(self.request.GET.get('to_date_year'))
+        member = int(self.request.GET.get('member'))
+
+        from_date = datetime.date(from_date_year, from_date_month, from_date_day)
+        to_date = datetime.date(to_date_year, to_date_month, to_date_day)
+        object_list = ExtraCost.objects.filter(user_id=member, expense_date__range=(from_date, to_date)).order_by(
+            'expense_date')
+
+        return object_list

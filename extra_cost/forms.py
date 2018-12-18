@@ -3,6 +3,7 @@ import datetime
 from django import forms
 from django.utils.translation import gettext as _
 
+from accounts.models import User
 from extra_cost.models import ExtraCost
 
 current_year = str(datetime.date.today().year)
@@ -47,3 +48,33 @@ class UpdateExtraCostForm(forms.ModelForm):
     class Meta:
         model = ExtraCost
         fields = ('expense_date', 'cost_name', 'cost')
+
+
+class ExtraCostSearchForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(ExtraCostSearchForm, self).__init__(*args, **kwargs)
+        self.fields['member'].label_from_instance = lambda obj: "%s" % obj.get_full_name()
+
+    member = forms.ModelChoiceField(
+        initial='',
+        queryset=User.objects.filter(is_active=True),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+    )
+    from_date = forms.DateField(
+        label='From date',
+        initial=datetime.date.today,
+        widget=forms.SelectDateWidget(
+            years=(current_year, next_year),
+            months=MONTHS,
+            attrs={'class': 'form-control'}))
+    to_date = forms.DateField(
+        label='To date',
+        initial=datetime.date.today,
+        widget=forms.SelectDateWidget(
+            years=(current_year, next_year),
+            months=MONTHS,
+            attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = ExtraCost
+        fields = ('member', 'from_date', 'to_date')
