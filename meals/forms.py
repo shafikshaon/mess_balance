@@ -3,6 +3,7 @@ import datetime
 from django import forms
 from django.utils.translation import gettext as _
 
+from accounts.models import User
 from meals.models import Meal
 
 BREAKFAST_MEAL_COUNT = (
@@ -72,3 +73,31 @@ class UpdateMealForm(forms.ModelForm):
     class Meta:
         model = Meal
         fields = ('meal_date', 'breakfast', 'lunch', 'dinner')
+
+
+class MealSearchForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(MealSearchForm, self).__init__(*args, **kwargs)
+        self.fields['member'].label_from_instance = lambda obj: "%s" % obj.get_full_name()
+
+    member = forms.ModelChoiceField(
+        initial='',
+        queryset=User.objects.filter(is_active=True),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+    )
+    from_date = forms.DateField(
+        label='From date',
+        widget=forms.SelectDateWidget(
+            years=(current_year, next_year),
+            months=MONTHS,
+            attrs={'class': 'form-control'}))
+    to_date = forms.DateField(
+        label='From date',
+        widget=forms.SelectDateWidget(
+            years=(current_year, next_year),
+            months=MONTHS,
+            attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Meal
+        fields = ('member', 'from_date', 'to_date')

@@ -5,8 +5,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic.edit import FormMixin
 
-from meals.forms import AddMealForm, UpdateMealForm
+from meals.forms import AddMealForm, UpdateMealForm, MealSearchForm
 from meals.models import Meal
 
 
@@ -32,10 +33,11 @@ class MealCreateView(LoginRequiredMixin, CreateView):
         return super().dispatch(*args, **kwargs)
 
 
-class MealListView(LoginRequiredMixin, ListView):
+class MealListView(LoginRequiredMixin, FormMixin, ListView):
     template_name = 'meals/list.html'
     login_url = '/accounts/login/'
     model = Meal
+    form_class = MealSearchForm
 
     # paginate_by = 1  # if pagination is desired
 
@@ -45,8 +47,6 @@ class MealListView(LoginRequiredMixin, ListView):
         context['object_list'] = Meal.objects.filter(user_id=self.request.user.pk,
                                                      meal_date__month=current_month).order_by(
             'meal_date')
-        context['meal_count'] = Meal.objects.filter(user_id=self.request.user.pk,
-                                                    meal_date__month=current_month).count()
         return context
 
 
@@ -62,3 +62,25 @@ class MealUpdateView(LoginRequiredMixin, UpdateView):
         meal.save()
         messages.success(self.request, 'A meal updated successfully.')
         return HttpResponseRedirect(reverse('meal-update', kwargs={'pk': meal.pk}))
+
+
+class MealSearchView(LoginRequiredMixin, FormMixin, ListView):
+    template_name = 'meals/list.html'
+    login_url = '/accounts/login/'
+    model = Meal
+    form_class = MealSearchForm
+
+    def get_queryset(self):
+        from_date_day = int(self.request.GET.get('from_date_day'))
+        from_date_month = int(self.request.GET.get('from_date_month'))
+        from_date_year = int(self.request.GET.get('from_date_year'))
+        to_date_day = int(self.request.GET.get('to_date_day'))
+        to_date_month = int(self.request.GET.get('to_date_month'))
+        to_date_year = int(self.request.GET.get('to_date_year'))
+        member = int(self.request.GET.get('member'))
+
+        from_date = datetime.date(from_date_year, from_date_month, from_date_day)
+        to_date = datetime.date(to_date_year, to_date_month, to_date_day)
+        object_list = Meal.objects.filter(user_id=member, meal_date__range=(from_date, to_date)).order_by('meal_date')
+
+        return object_list

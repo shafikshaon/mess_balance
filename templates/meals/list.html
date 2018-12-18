@@ -4,7 +4,7 @@
     <div class="container content-area">
         <div class="row">
             <div class="col-md-12">
-                <h4>Meal List ({{ meal_count }})</h4>
+                <h4>Meal List</h4>
                 {% if messages %}
                     {% for message in messages %}
                         <div class="alert {{ message.tags }} alert-dismissible" role="alert">
@@ -17,6 +17,35 @@
                         </div>
                     {% endfor %}
                 {% endif %}
+                <form method="get" action="{% url 'meal-search' %}" class="form-inline">
+                    {#                    {% csrf_token %}#}
+                    {% for field in form.visible_fields %}
+                        <div class="form-group">
+                            <label class="m-b-10 m-r-5"
+                                   for="{{ field.id_for_label }}"><strong>{{ field.label_tag }}</strong></label>
+                            <div class="input-group mb-2 mr-sm-2">
+                                {% if field.field.widget.input_type == 'select' or field.field.widget.input_type == 'text' %}
+                                    {{ field }}
+                                {% endif %}
+
+                                {% if field.errors %}
+                                    <ul>
+                                        {% for error in field.errors %}
+                                            <li><span class="text-danger m-b-none">{{ error }}</span></li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+
+                                {% if field.help_text %}
+                                    <span class="help-block m-b-none">{{ field.help_text }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                </form>
+
                 <div class="card">
                     <table class="table table-striped table-responsive-sm table-responsive-xl table-responsive-md">
                         <thead>
@@ -38,7 +67,7 @@
                                 <td>{{ meal.dinner }}</td>
                                 <td>{{ meal.created_at }}</td>
                                 <td class="table-action">
-                                    <a href="{% url 'meal-update' meal.pk %}" data-toggle="tooltip"
+                                    <a href="{% url 'meal-update' meal.id %}" data-toggle="tooltip"
                                        data-placement="top"
                                        title="View">
                                         <i class="ti-pencil-alt m-r-10"></i>
