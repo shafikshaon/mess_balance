@@ -694,6 +694,23 @@ ul {
 .text-decoration-none:hover {
     text-decoration: none;
 }
+
 .w-30 {
     width: 30% !important;
 }
+
+.card {
+    padding: 10px;
+}
+
+/*button.dt-button {*/
+/*color: #fff;*/
+/*background-color: #593196;*/
+/*border-color: #593196;*/
+/*}*/
+
+/*button.dt-button:hover:not(.disabled) {*/
+/*color: #fff;*/
+/*background-color: #482879;*/
+/*border-color: #422470;*/
+/*}*/
