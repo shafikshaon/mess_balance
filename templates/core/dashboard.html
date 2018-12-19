@@ -51,5 +51,78 @@
             </div>
 
         </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card bg-light mb-3">
+                    <div class="card-header">Total meals in <strong>{% now "F" %}</strong></div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ current_month_total_meals.total_meals }}</h5>
+                        <p class="card-text">
+                            {% for user_meal in current_month_user_meals %}
+                                <li>{{ user_meal.user__first_name }} {{ user_meal.user__last_name }}
+                                    <strong>
+                                        ({{ user_meal.total_meals }})
+                                    </strong>
+                                </li>
+                            {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card bg-light mb-3">
+                    <div class="card-header">Total bazaar in <strong>{% now "F" %}</strong></div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ current_month_total_bazaar.total_bazaar }}</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card bg-light mb-3">
+                    <div class="card-header">Total extra cost in <strong>{% now "F" %}</strong></div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ current_month_total_extra_cost.total_extra_costs }}</h5>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card bg-light mb-3">
+                    <div class="card-header">Total meals in <strong>{% now "F" %}</strong></div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ previous_month_total_meals.total_meals }}</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card bg-light mb-3">
+                    <div class="card-header">Total bazaar in <strong>{% now "F" %}</strong></div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ previous_month_total_bazaar.total_bazaar }}</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card bg-light mb-3">
+                    <div class="card-header">Total extra cost in <strong>{% now "F" %}</strong></div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ previous_month_total_extra_cost.total_extra_costs }}</h5>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 {% endblock %}
