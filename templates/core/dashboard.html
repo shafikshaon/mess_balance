@@ -77,6 +77,14 @@
                     <div class="card-header">Total bazaar in <strong>{% now "F" %}</strong></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ current_month_total_bazaar.total_bazaar }}</h5>
+                        <p class="card-text">
+                            {% for user_bazaar in current_month_user_bazaar %}
+                                <li>{{ user_bazaar.user__first_name }} {{ user_bazaar.user__last_name }}
+                                    <strong>
+                                        ({{ user_bazaar.total_bazaar }})
+                                    </strong>
+                                </li>
+                            {% endfor %}
                     </div>
                 </div>
             </div>
@@ -86,6 +94,13 @@
                     <div class="card-header">Total extra cost in <strong>{% now "F" %}</strong></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ current_month_total_extra_cost.total_extra_costs }}</h5>
+                        {% for user_extra_cost in current_month_user_extra_cost %}
+                            <li>{{ user_extra_cost.user__first_name }} {{ user_extra_cost.user__last_name }}
+                                <strong>
+                                    ({{ user_extra_cost.total_extra_costs }})
+                                </strong>
+                            </li>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -97,27 +112,48 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card bg-light mb-3">
-                    <div class="card-header">Total meals in <strong>{% now "F" %}</strong></div>
+                    <div class="card-header">Total meals in <strong>{{ previous_month|date:'F' }}</strong></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ previous_month_total_meals.total_meals }}</h5>
+                        {% for user_meal in previous_month_user_meals %}
+                            <li>{{ user_meal.user__first_name }} {{ user_meal.user__last_name }}
+                                <strong>
+                                    ({{ user_meal.total_meals }})
+                                </strong>
+                            </li>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="card bg-light mb-3">
-                    <div class="card-header">Total bazaar in <strong>{% now "F" %}</strong></div>
+                    <div class="card-header">Total bazaar in <strong>{{ previous_month|date:'F' }}</strong></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ previous_month_total_bazaar.total_bazaar }}</h5>
+                        {% for user_bazaar in previous_month_user_bazaar %}
+                            <li>{{ user_bazaar.user__first_name }} {{ user_bazaar.user__last_name }}
+                                <strong>
+                                    ({{ user_bazaar.total_bazaar }})
+                                </strong>
+                            </li>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="card bg-light mb-3">
-                    <div class="card-header">Total extra cost in <strong>{% now "F" %}</strong></div>
+                    <div class="card-header">Total extra cost in <strong>{{ previous_month|date:'F' }}</strong></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ previous_month_total_extra_cost.total_extra_costs }}</h5>
+                        {% for user_extra_cost in previous_month_user_extra_cost %}
+                            <li>{{ user_extra_cost.user__first_name }} {{ user_extra_cost.user__last_name }}
+                                <strong>
+                                    ({{ user_extra_cost.total_extra_costs }})
+                                </strong>
+                            </li>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
