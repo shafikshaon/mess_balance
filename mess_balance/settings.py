@@ -41,6 +41,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     'debug_toolbar',
+    'mathfilters',
 ]
 
 CUSTOM_APPS = [
@@ -140,7 +141,7 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.redirects.RedirectsPanel',
 ]
 
-INTERNAL_IPS = ['*']
+INTERNAL_IPS = ['127.0.0.1']
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

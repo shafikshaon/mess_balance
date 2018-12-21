@@ -44,9 +44,10 @@ class MealListView(LoginRequiredMixin, FormMixin, ListView):
     def get_context_data(self, **kwargs):
         current_month = datetime.datetime.now().month
         context = super().get_context_data(**kwargs)
-        context['object_list'] = Meal.objects.filter(user_id=self.request.user.pk,
-                                                     meal_date__month=current_month).order_by(
-            'meal_date')
+        context['object_list'] = Meal.objects \
+            .select_related('user') \
+            .filter(user_id=self.request.user.pk, meal_date__month=current_month) \
+            .order_by('meal_date')
         return context
 
 

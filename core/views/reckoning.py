@@ -47,6 +47,21 @@ class ReckoningView(LoginRequiredMixin, FormMixin, View):
             .values('user_id', 'user__first_name', 'user__last_name') \
             .annotate(total_extra_costs=Sum('cost'))
 
+        month_user_bazaar2 = User.objects \
+            .select_related('meals') \
+            .values('user_id', 'user__first_name', 'user__last_name') \
+            .prefetch_related('user__bazaar_user') \
+            .values('user__bazaar_user__item_price') \
+            .aggregate(h=Sum('user__bazaar_user__item_price'))
+
+        # .annotate(total_bazaar=Sum('user__bazaar_user__item_price'), total_meals=Sum(F('breakfast') + F('lunch') +
+        #                                                                             F('dinner')))
+        # month_user_bazaar = Bazaar.objects.select_related('user') \
+        #     .filter(bazaar_date__month=current_month) \
+        #     .values('user_id', 'user__first_name', 'user__last_name') \
+        #     .annotate(total_bazaar=Sum('item_price'))
+        print(month_user_bazaar2)
+
         context = {
             'month_meals_count': month_meals_count,
             'month_total_bazaar': month_total_bazaar,
@@ -56,20 +71,5 @@ class ReckoningView(LoginRequiredMixin, FormMixin, View):
             'month_user_meals': month_user_meals,
             'month_user_bazaar': month_user_bazaar,
             'month_user_extra_cost': month_user_extra_cost,
-            # 'today_meals_count': today_meals_count,
-            # 'today_meals': today_meals,
-            # 'current_month_total_meals': current_month_total_meals,
-            # 'current_month_user_meals': current_month_user_meals,
-            # 'current_month_total_bazaar': current_month_total_bazaar,
-            # 'current_month_user_bazaar': current_month_user_bazaar,
-            # 'current_month_total_extra_cost': current_month_total_extra_cost,
-            # 'current_month_user_extra_cost': current_month_user_extra_cost,
-            # 'previous_month_total_meals': previous_month_total_meals,
-            # 'previous_month_total_bazaar': previous_month_total_bazaar,
-            # 'previous_month_total_extra_cost': previous_month_total_extra_cost,
-            # 'previous_month_user_meals': previous_month_user_meals,
-            # 'previous_month_user_bazaar': previous_month_user_bazaar,
-            # 'previous_month_user_extra_cost': previous_month_user_extra_cost,
-            # 'previous_month': previous_month
         }
         return render(request, self.template_name, context)

@@ -1,4 +1,5 @@
 {% extends 'base2.html' %}
+{% load mathfilters %}
 {% block title %} Reckoning {% endblock %}
 {% block content %}
     <div class="container content-area">
@@ -93,6 +94,84 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-responsive" id="reckoning">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Meal</th>
+                                <th>Meal Expense</th>
+                                <th>Extra Cost</th>
+                                <th>Extra Cost + Meal Expense</th>
+                                <th>Bazaar</th>
+                                <th>Debit/ Credit (With Extra Cost)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user_bazaar in month_user_bazaar %}
+                                <tr>
+                                    {% for user_meal in month_user_meals %}
+
+                                        {% if user_meal.user_id == user_bazaar.user_id %}
+                                            <td>{{ user_bazaar.user__first_name }} {{ user_bazaar.user__last_name }}</td>
+                                        {% endif %}
+
+                                        {% if user_meal.user_id == user_bazaar.user_id %}
+                                            <td>{{ user_meal.total_meals }}</td>
+                                        {% endif %}
+
+                                        {% if user_meal.user_id == user_bazaar.user_id %}
+                                            <td>
+                                                {{ user_meal.total_meals }}
+                                                X {{ meal_rate|floatformat }} =
+                                                {{ meal_rate|mul:user_meal.total_meals|floatformat }}
+                                            </td>
+                                        {% endif %}
+
+                                        {% if user_meal.user_id == user_bazaar.user_id %}
+                                            <td>{{ extra_cost_per_member }}</td>
+                                        {% endif %}
+
+                                        {% if user_meal.user_id == user_bazaar.user_id %}
+                                            <td>
+                                                {{ extra_cost_per_member }}
+                                                + {{ meal_rate|mul:user_meal.total_meals|floatformat }} =
+                                                {{ meal_rate|mul:user_meal.total_meals|add:extra_cost_per_member|floatformat }}
+                                            </td>
+                                        {% endif %}
+
+                                        {% if user_meal.user_id == user_bazaar.user_id %}
+                                            <td>{{ user_bazaar.total_bazaar }}</td>
+                                        {% endif %}
+
+                                        {% if user_meal.user_id == user_bazaar.user_id %}
+                                            <td>
+                                                {{ meal_rate|mul:user_meal.total_meals|add:extra_cost_per_member|sub:user_bazaar.total_bazaar|floatformat }}
+                                            </td>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <td></td>
+                                <td>{{ month_meals_count.total_meals }}</td>
+                                <td></td>
+                                <td>{{ month_total_extra_cost.total_extra_costs }}</td>
+                                <td></td>
+                                <td>{{ month_total_bazaar.total_bazaar }}</td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
 
     </div>
 {% endblock %}
