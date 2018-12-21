@@ -53,6 +53,7 @@
                             <th>B</th>
                             <th>L</th>
                             <th>D</th>
+                            <th>Added by</th>
                             <th>Created</th>
                             <th>Action</th>
                         </tr>
@@ -64,6 +65,7 @@
                                 <td>{{ meal.breakfast }}</td>
                                 <td>{{ meal.lunch }}</td>
                                 <td>{{ meal.dinner }}</td>
+                                <td>{{ meal.user.get_full_name }}</td>
                                 <td>{{ meal.created_at }}</td>
                                 <td class="table-action">
                                     <a href="{% url 'meal-update' meal.id %}" data-toggle="tooltip"

@@ -76,3 +76,19 @@ class ExtraCostSearchView(LoginRequiredMixin, FormMixin, ListView):
             'expense_date')
 
         return object_list
+
+
+class AccountingExtraCostListView(LoginRequiredMixin, FormMixin, ListView):
+    template_name = 'extra_cost/list.html'
+    login_url = 'accounts/login/'
+    model = ExtraCost
+    form_class = ExtraCostSearchForm
+
+    # paginate_by = 1  # if pagination is desired
+
+    def get_context_data(self, **kwargs):
+        current_month = datetime.datetime.now().month
+        context = super().get_context_data(**kwargs)
+        context['object_list'] = ExtraCost.objects.filter(expense_date__month=current_month).order_by(
+            'expense_date')
+        return context

@@ -42,8 +42,8 @@
                             <th>Item</th>
                             <th>W</th>
                             <th>P</th>
-                            <th>Added</th>
                             <th>Added by</th>
+                            <th>Added</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -54,8 +54,8 @@
                                 <td>{{ bazaar.item_name }}</td>
                                 <td>{{ bazaar.item_weight }}</td>
                                 <td>{{ bazaar.item_price }}</td>
-                                <td>{{ bazaar.created_at }}</td>
                                 <td>{{ bazaar.user.get_full_name }}</td>
+                                <td>{{ bazaar.created_at }}</td>
                                 <td class="table-action">
                                     <a href="{% url 'bazaar-update' bazaar.pk %}" data-toggle="tooltip"
                                        data-placement="top"

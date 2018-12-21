@@ -108,7 +108,15 @@
                 </ul>
             </li>
             <li>
-                <a href="#" class=" wave-effect">Contact</a>
+                <a href="#accountingSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
+                   aria-expanded="false">
+                    <i class="ti-shopping-cart m-r-10"></i> Accounting
+                </a>
+                <ul class="collapse list-unstyled" id="accountingSubmenu" data-parent="#accordion">
+                    <li><a href="{% url 'accounting-meal-list' %}">Meals</a></li>
+                    <li><a href="{% url 'accounting-bazaar-list' %}">Bazaar</a></li>
+                    <li><a href="{% url 'accounting-extra_cost-list' %}">Extra Cost</a></li>
+                </ul>
             </li>
         </ul>
     </nav>
@@ -144,7 +152,7 @@
             dom: 'Bfrtip',
             buttons: [
                 'excel', 'pdf'
-            ]
+            ],
 
             {#dom: 'Bfrtip',#}
             {#buttons: [#}

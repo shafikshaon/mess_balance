@@ -84,3 +84,19 @@ class MealSearchView(LoginRequiredMixin, FormMixin, ListView):
         object_list = Meal.objects.filter(user_id=member, meal_date__range=(from_date, to_date)).order_by('meal_date')
 
         return object_list
+
+
+class AccountingMealListView(LoginRequiredMixin, FormMixin, ListView):
+    template_name = 'meals/list.html'
+    login_url = '/accounts/login/'
+    model = Meal
+    form_class = MealSearchForm
+
+    # paginate_by = 1  # if pagination is desired
+
+    def get_context_data(self, **kwargs):
+        current_month = datetime.datetime.now().month
+        context = super().get_context_data(**kwargs)
+        context['object_list'] = Meal.objects.filter(meal_date__month=current_month).order_by(
+            'meal_date')
+        return context

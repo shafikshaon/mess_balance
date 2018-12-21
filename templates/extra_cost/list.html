@@ -41,8 +41,8 @@
                             <th>Date</th>
                             <th>Name</th>
                             <th>Cost</th>
-                            <th>Added</th>
                             <th>Added by</th>
+                            <th>Added</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -52,8 +52,8 @@
                                 <td>{{ extra_cost.expense_date }}</td>
                                 <td>{{ extra_cost.cost_name }}</td>
                                 <td>{{ extra_cost.cost }}</td>
-                                <td>{{ extra_cost.created_at }}</td>
                                 <td>{{ extra_cost.user.get_full_name }}</td>
+                                <td>{{ extra_cost.created_at }}</td>
                                 <td class="table-action">
                                     <a href="{% url 'extra_cost-update' extra_cost.pk %}" data-toggle="tooltip"
                                        data-placement="top"

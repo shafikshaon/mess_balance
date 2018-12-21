@@ -76,3 +76,19 @@ class BazaarSearchView(LoginRequiredMixin, FormMixin, ListView):
             'bazaar_date')
 
         return object_list
+
+
+class AccountingBazaarListView(LoginRequiredMixin, FormMixin, ListView):
+    template_name = 'bazaar/list.html'
+    login_url = 'accounts/login/'
+    model = Bazaar
+    form_class = BazaarSearchForm
+
+    # paginate_by = 1  # if pagination is desired
+
+    def get_context_data(self, **kwargs):
+        current_month = datetime.datetime.now().month
+        context = super().get_context_data(**kwargs)
+        context['object_list'] = Bazaar.objects.filter(bazaar_date__month=current_month).order_by(
+            'bazaar_date')
+        return context
