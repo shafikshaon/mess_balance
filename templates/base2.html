@@ -90,7 +90,7 @@
             <li>
                 <a href="#bazaarSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
                    aria-expanded="false">
-                    <i class="ti-shopping-cart m-r-10"></i> Bazaar
+                    <i class="ti-shopping-cart-full m-r-10"></i> Bazaar
                 </a>
                 <ul class="collapse list-unstyled" id="bazaarSubmenu" data-parent="#accordion">
                     <li><a href="{% url 'bazaar-add' %}">Bazaar Entry</a></li>
@@ -100,7 +100,7 @@
             <li>
                 <a href="#extra_costSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
                    aria-expanded="false">
-                    <i class="ti-shopping-cart m-r-10"></i> Extra Cost
+                    <i class="ti-money m-r-10"></i> Extra Cost
                 </a>
                 <ul class="collapse list-unstyled" id="extra_costSubmenu" data-parent="#accordion">
                     <li><a href="{% url 'extra_cost-add' %}">Extra Cost Entry</a></li>
@@ -110,12 +110,13 @@
             <li>
                 <a href="#accountingSubmenu" class="accordion-toggle wave-effect" data-toggle="collapse"
                    aria-expanded="false">
-                    <i class="ti-shopping-cart m-r-10"></i> Accounting
+                    <i class="ti-money m-r-10"></i> Accounting
                 </a>
                 <ul class="collapse list-unstyled" id="accountingSubmenu" data-parent="#accordion">
                     <li><a href="{% url 'accounting-meal-list' %}">Meals</a></li>
                     <li><a href="{% url 'accounting-bazaar-list' %}">Bazaar</a></li>
                     <li><a href="{% url 'accounting-extra_cost-list' %}">Extra Cost</a></li>
+                    <li><a href="{% url 'reckoning' %}">Reckoning</a></li>
                 </ul>
             </li>
         </ul>

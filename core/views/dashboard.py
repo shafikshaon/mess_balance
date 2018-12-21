@@ -20,7 +20,7 @@ class DashboardView(LoginRequiredMixin, View):
         previous_month = datetime.date.today().replace(day=1) - datetime.timedelta(days=1)
         today_meals_count = Meal.objects \
             .filter(meal_date__day=today) \
-            .aggregate(today_breakfast_count=Sum('breakfast') * 2, today_lunch_count=Sum('lunch'),
+            .aggregate(today_breakfast_count=Sum('breakfast'), today_lunch_count=Sum('lunch'),
                        today_dinner_count=Sum('dinner'))
 
         today_meals = Meal.objects.select_related('user').filter(meal_date__day=today)

@@ -18,10 +18,12 @@ from django.conf.urls.static import static
 from django.urls import path, include
 
 from core.views.dashboard import DashboardView
+from core.views.reckoning import ReckoningView
 from mess_balance import settings
 
 urlpatterns = [
     path('', DashboardView.as_view()),
+    path('reckoning/', ReckoningView.as_view(), name='reckoning'),
     path('accounts/', include('accounts.urls')),
     path('meals/', include('meals.urls')),
     path('bazaar/', include('bazaar.urls')),

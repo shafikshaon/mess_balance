@@ -1,0 +1,98 @@
+{% extends 'base2.html' %}
+{% block title %} Reckoning {% endblock %}
+{% block content %}
+    <div class="container content-area">
+        <h5 class="text-info">{% now "j F Y, H:i" %}</h5>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td><strong>Total Meals: </strong></td>
+                                <td class="pl-3">{{ month_meals_count.total_meals }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total Bazaar: </strong></td>
+                                <td class="pl-3">{{ month_total_bazaar.total_bazaar }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total Extra Cost: </strong></td>
+                                <td class="pl-3">{{ month_total_extra_cost.total_extra_costs }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td><strong>Meal Rate: </strong></td>
+                                <td class="pl-3">{{ meal_rate|floatformat }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Extra Cost Per Member: </strong></td>
+                                <td class="pl-3">{{ extra_cost_per_member|floatformat }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <p><strong>Total Meals: </strong>{{ month_meals_count.total_meals }}</p>
+                        {% for user_meal in month_user_meals %}
+                            <li>{{ user_meal.user__first_name }} {{ user_meal.user__last_name }}
+                                <strong>
+                                    ({{ user_meal.total_meals }})
+                                </strong>
+                            </li>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <p><strong>Total Bazaar: </strong>{{ month_total_bazaar.total_bazaar }}</p>
+                        {% for user_bazaar in month_user_bazaar %}
+                            <li>{{ user_bazaar.user__first_name }} {{ user_bazaar.user__last_name }}
+                                <strong>
+                                    ({{ user_bazaar.total_bazaar }})
+                                </strong>
+                            </li>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <p><strong>Total Extra Cost: </strong>{{ month_total_extra_cost.total_extra_costs }}</p>
+                        {% for user_extra_cost in month_user_extra_cost %}
+                            <li>{{ user_extra_cost.user__first_name }} {{ user_extra_cost.user__last_name }}
+                                <strong>
+                                    ({{ user_extra_cost.total_extra_costs }})
+                                </strong>
+                            </li>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
