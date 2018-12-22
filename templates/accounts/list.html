@@ -35,7 +35,7 @@
                                     {% endif %}
                                 </td>
                                 <td>{{ user.created_at }}</td>
-                                <td>{{ user.user.get_full_name }}</td>
+                                <td>{{ user.get_full_name }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>

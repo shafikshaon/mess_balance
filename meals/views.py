@@ -82,7 +82,9 @@ class MealSearchView(LoginRequiredMixin, FormMixin, ListView):
 
         from_date = datetime.date(from_date_year, from_date_month, from_date_day)
         to_date = datetime.date(to_date_year, to_date_month, to_date_day)
-        object_list = Meal.objects.filter(user_id=member, meal_date__range=(from_date, to_date)).order_by('meal_date')
+        object_list = Meal.objects.select_related('user').filter(user_id=member,
+                                                                 meal_date__range=(from_date, to_date)).order_by(
+            'meal_date')
 
         return object_list
 

@@ -35,8 +35,8 @@ class BazaarListView(LoginRequiredMixin, FormMixin, ListView):
     def get_context_data(self, **kwargs):
         current_month = datetime.datetime.now().month
         context = super().get_context_data(**kwargs)
-        context['object_list'] = Bazaar.objects.filter(user_id=self.request.user.pk,
-                                                       bazaar_date__month=current_month).order_by(
+        context['object_list'] = Bazaar.objects.select_related('user').filter(user_id=self.request.user.pk,
+                                                                              bazaar_date__month=current_month).order_by(
             'bazaar_date')
         return context
 
@@ -72,7 +72,8 @@ class BazaarSearchView(LoginRequiredMixin, FormMixin, ListView):
 
         from_date = datetime.date(from_date_year, from_date_month, from_date_day)
         to_date = datetime.date(to_date_year, to_date_month, to_date_day)
-        object_list = Bazaar.objects.filter(user_id=member, bazaar_date__range=(from_date, to_date)).order_by(
+        object_list = Bazaar.objects.select_related('user').filter(user_id=member,
+                                                                   bazaar_date__range=(from_date, to_date)).order_by(
             'bazaar_date')
 
         return object_list

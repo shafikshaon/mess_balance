@@ -35,9 +35,10 @@ class ExtraCostListView(LoginRequiredMixin, FormMixin, ListView):
     def get_context_data(self, **kwargs):
         current_month = datetime.datetime.now().month
         context = super().get_context_data(**kwargs)
-        context['object_list'] = ExtraCost.objects.filter(user_id=self.request.user.pk,
-                                                          expense_date__month=current_month).order_by(
-            'expense_date')
+        context['object_list'] = ExtraCost.objects \
+            .select_related('user') \
+            .filter(user_id=self.request.user.pk, expense_date__month=current_month) \
+            .order_by('expense_date')
         return context
 
 
@@ -72,7 +73,8 @@ class ExtraCostSearchView(LoginRequiredMixin, FormMixin, ListView):
 
         from_date = datetime.date(from_date_year, from_date_month, from_date_day)
         to_date = datetime.date(to_date_year, to_date_month, to_date_day)
-        object_list = ExtraCost.objects.filter(user_id=member, expense_date__range=(from_date, to_date)).order_by(
+        object_list = ExtraCost.objects.select_related('user').filter(user_id=member, expense_date__range=(
+            from_date, to_date)).order_by(
             'expense_date')
 
         return object_list
